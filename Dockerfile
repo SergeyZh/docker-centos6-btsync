@@ -21,4 +21,4 @@ RUN chmod a+x /run-services.sh
 
 CMD /run-services.sh
 
-EXPOSE 8888 8889
+EXPOSE 8889
