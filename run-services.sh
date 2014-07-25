@@ -29,6 +29,16 @@ shutdown_btsync()
 
 trap shutdown_btsync SIGINT SIGTERM SIGHUP
 
-/btsync --config /btsync.conf --nodaemon &
+
+if [ ! -z "${BTSYNC_USERID}" ] ; then
+    BTSYNC_USER=`getent passwd ${BTSYNC_USERID} | awk -F: '{ print $1 }'`
+    if [ -z "${BTSYNC_USER}" ] ; then
+	/usr/sbin/useradd -u ${BTSYNC_USERID} btsync-user
+	BTSYNC_USER=btsync-user
+    fi
+    chown -R ${BTSYNC_USER} /mnt/storage /.sync
+fi
+
+su ${BTSYNC_USER} -c "/btsync --config /btsync.conf --nodaemon &"
 
 wait
