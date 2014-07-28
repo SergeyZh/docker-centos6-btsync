@@ -23,7 +23,7 @@ shutdown_btsync()
 {
     echo "Stopping container..."
     killall btsync
-    while [ ! -z "`ps x | grep btsync`" ] ; do echo -n "." ; sleep 1 ; done
+    while [ ! -z "`ps x | grep -v grep | grep btsync`" ] ; do echo -n "." ; sleep 1 ; done
     exit 0
 }
 
@@ -39,6 +39,6 @@ if [ ! -z "${BTSYNC_USERID}" ] ; then
     chown -R ${BTSYNC_USER} /mnt/storage /.sync
 fi
 
-su ${BTSYNC_USER} -c "/btsync --config /btsync.conf --nodaemon &"
+su ${BTSYNC_USER} -c "/btsync --config /btsync.conf --nodaemon" &
 
 wait
