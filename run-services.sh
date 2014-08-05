@@ -19,6 +19,21 @@ if [ ! -z "`grep MY_SECRET_1 btsync.conf`" ] ; then
     sed -i "s/\"device_name\": \"My Sync Device\",/\"device_name\": \"${NODENAME}\",/" btsync.conf
 fi
 
+if [ ! -z "${USE_SYNC_TRASH}" ] ; then
+    echo "use_sync_trash : ${USE_SYNC_TRASH}"
+    sed -i "s/use_sync_trash : .*/use_sync_trash : ${USE_SYNC_TRASH},/" btsync.conf
+fi
+
+if [ ! -z "${USE_SYNC_TRASH}" ] ; then
+    echo "use_sync_trash : ${USE_SYNC_TRASH}"
+    sed -i "s/\"use_sync_trash\" : .*/\"use_sync_trash\" : ${USE_SYNC_TRASH},/" btsync.conf
+fi
+
+if [ ! -z "${USE_DHT}" ] ; then
+    echo "use_dht : ${USE_DHT}"
+    sed -i "s/\"use_dht\" : .*/\"use_dht\" : ${USE_DHT},/" btsync.conf
+fi
+
 shutdown_btsync()
 {
     echo "Stopping container..."
