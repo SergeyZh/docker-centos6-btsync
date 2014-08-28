@@ -6,7 +6,9 @@ NODENAME=`hostname -s`
 if [ -z "${STORAGE_SECRET}" ] ; then
     echo "Can't run without environment variable STORAGE_SECRET !"
     TMP_VAL=`/btsync --generate-secret`
-    echo "You can use the following generated value: "${TMP_VAL}" ."
+    RO_KEY=`/btsync --get-ro-secret ${TMP_VAL}`
+    echo "You can use the following generated value: ${TMP_VAL}"
+    echo "Read-only secret from that generated secret is: ${RO_KEY}" 
     echo "Just add the following parameter to your \"docker run\" command : -e STORAGE_SECRET="${TMP_VAL}
     echo "Exiting..."
     exit 1
