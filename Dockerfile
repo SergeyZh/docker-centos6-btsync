@@ -2,7 +2,7 @@ FROM sergeyzh/centos6-epel
 
 MAINTAINER Sergey Zhukov, sergey@jetbrains.com
 
-ADD btsync_x64.tar.gz /
+ADD btsync_x64-1.4.111.tar.gz /
 ADD btsync.conf /
 
 # RUN /btsync --dump-sample-config > btsync.conf
